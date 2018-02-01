@@ -1,0 +1,97 @@
+ll  <<==>> ls -l 查看文件和属性
+chgrp 	更改文件属组
+		eg: chgrp [-R] 属组名文件名
+chown	更改文件属主，也可以同时更改文件属组    
+		eg: chown [–R] 属主名 文件名      chown [-R] 属主名：属组名 文件名          chown bin install.log(将install.log的拥有者改为bin这个账号)
+chmod	更改文件9个属性 r:4 w:2 x:1    u:user  g:group  o:others  a:all   +加入  -除去  =设定
+		eg:	chmod 777 .bashrc     
+			chmod a+w .bashrc
+mkdir:	创建一个新的目录
+rmdir:	删除一个空的目录	
+cp:		复制文件或目录  -a:pdr   -d:若来源档为连结档的属性(link file)，则复制连结档属性而非文件本身   -p：连同文件的属性一起复制过去，而非使用默认属性(备份常用)；
+		-r：递归持续复制，用於目录的复制行为；(常用)
+		eg：cp -i ~/.bashrc /tmp/bashrc  将 root 目录下的 .bashrc 复制到 /tmp 下，并命名为 bashrc
+rmdir	移除文件或目录
+mv		移动文件与目录，或修改名称
+cat		由第一行开始显示文件内容
+tac		从最后一行开始显示
+nl		显示行号
+more	一页一页翻动      空白键：代表向下翻一页       Enter:单标向下放一行
+tail	取出文件后面几行    -f:持续侦测
+
+useradd	添加新的用户账号 useradd 选项 用户名
+		-c  comment指定一段注释性描述。
+		-d 目录      指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。
+		-g 用户组   -s Shell文件
+userdel 选项 用户名   
+		eg:  userdel -r sam   -r 把用户的主目录一起删除
+usermod 选项 用户名（参数和添加基本一致）
+passwd  操作口令
+groupadd 选项 用户组	 增加一个新的用户组
+		-g GID 指定新用户组的组标识号(GID)
+		-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。
+groupdel 用户组 删除一个已有的用户组
+groupmod 选项 用户组      修改用户组的属性
+		-g [-o]  和添加一样
+		-n 新用户组将用户组的名字改为新名字
+newgrp	切换到用户的其他用户组
+
+shell	用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的
+		的程序即shell。
+		shell是用户与linux之间的接口，有多种（sh,csh,kch,tcsh,bash..）。
+		系统管理员可以根据系统情况和用户习惯为用户指定某个shell，如果不指定shell，那么系统默认使用sh为默认的登录shell。
+用户组	将用户分组是linux系统中对用户进行管理及控制访问权限的一种手段。
+		每个用户都属于某个用户组，一个组可以有多个用户，一个用户也可以属于不同的组。
+		用户组的所有信息都放在/etc/group文件中。
+		
+批量添加用户	
+		1.编辑一个用户文本user.txt  格式和etc/passwd文件一样，密码可以先为空。
+			newusers < user.txt
+			查看passwd文件是否出现新用户
+		2.pwuconv  将etc/shadow产生的shadow密码解码，然后回写到/etc/passwd中，并将shadow文件中shadow
+			密码栏删掉。（取消shadow password功能）
+		3.编辑密码文件 passwd.txt
+			user1:xxxx
+			user2:xxxx
+			....
+			chpasswd < passwd.txt
+		4.pwconv 将密码编码为shadow password , 并将结果写入/etc/shadow
+df		检查文件系统的磁盘空间占用情况，可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息
+		-a:列出所有的文件系统，包括系统特有的/proc等文件系统；
+		-k:以Kbytes的容量显示个文件系统，
+		-m:以MBytes的容量显示各文件系统，
+		-h:以人们较易阅读的GBytes,Mbytes,Kbytes等格式自行显示
+		-H:以M=1000k取代M=1024K的进位方式
+du		与df不同，du是对文件和目录磁盘使用的空间的查看。 （df更精确一点，df可以找到已经删除的文件计算进去）
+		-a:列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。
+		-h:以人们教易读的格式显示
+		-s:列出总量，而不列出每个个别的目录占用容量
+		-k:以KBytest列出容量显示，-m:以MBytes列出容量显示
+mkfs [-t] 装置文件名
+		-t:可以接文件系统格式，例如ext3，ext2，vfat等（系统有支持才会生效）
+vi/vim	三种模式：命令模式，插入模式，底线命令模式。
+		命令模式：
+			用户刚刚启动vi/vim,便进入了命令模式。
+			i切换到插入模式，以输入字符。
+			x删除当前光标所处的字符
+			:切换到底线命令模式，以在最底一行输入命令。
+			按esc键，退出编辑，
+			:wq存储后离开vi。
+yum		Fedora和RedHat以及Suse中的Shell前端软件包管理器，基于RPM包管理，能够从指定的服务器自动下载RPM
+			包并且安装，可以自动处理依赖性关系，并且一次安装所有以来的软体包，无需繁琐的一次次下载，安装
+		提供了查找，安装，删除某一个，一组甚至全部软件包的命令，而且命令简洁而又好记。
+		yum [options] [command] [package ....]
+		options: 可选，-h(帮助),  -y(当安装过程提示选择全部为yes),  -q(不显示安装的过程)
+		commond: 要进行的操作。
+		package操作的对象。
+		yum check-update    列出所有可更新的软件清单命令
+		yum update			更新所有软件命令
+		yum install <package_name> 安装指定的软件命令
+		yum update <package_name>
+		yum remove <package_name>
+		yum clean packages	清楚缓存目录下的软件包
+		yum clean headers:	清除缓存目录下的headers
+
+
+
+		

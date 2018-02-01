@@ -1,0 +1,43 @@
+XML映射配置文件
+	Mybatis的配置文件包含了会深深影响Mybatis行为的设置(settings)和属性(properties)信息。顶层结构如下
+	configuration配置
+		properties 属性
+		settings 设置
+		typeAliases 类型别名
+		typeHandlers 类型处理器
+		objectFactory 对象工厂
+		plugins 插件
+		environments 环境
+			environment 环境变量
+				transactionManager 事物管理器
+				dataSource 数据源
+		databaseldProvider 数据库厂商标识
+		mappers 映射器
+		
+	
+		properties:
+			这些属性是可外部配置且可动态替换的，即可以在典型的Java属性文件中配置，亦可通过properties元素的子元素来传递。例如：
+				<properties resource="org/mybatis/exapmle/config.properties">
+					<property name="username" value="dev_user"/>
+					<property name="password" value="F2Fa3!33TYyg"/>
+				</properties>
+			其中的属性就可以在整个配置文件中使用来替换需要动态配置的属性值。比如：
+				<dataSource type="POOLED">
+				  <property name="driver" value="${driver}"/>
+				  <property name="url" value="${url}"/>
+				  <property name="username" value="${username}"/>
+				  <property name="password" value="${password}"/>
+				</dataSource>
+			这个例子中的username和password将会有properties元素中设置的相应值来替换。driver和url属性将会有config.properties文件中对应的值来替换。
+				这样就为配置提供了诸多灵活的选择。
+			属性也可以被传递到SqlSessionFactoryBuilder.build()方法中，例如：
+				SqlSessionFactory factory = new SqlSessionFactoryBuilder().buile(reader,props);
+				//...or..
+				SqlSessionFactory factory = new SqlSessionFactoryBuilder().buil(reader,environment,props);
+			如果属性在不止一个地方进行了配置，那么Mybatis讲按照下面的顺序来加载。
+				1.在properties元素体内指定的属性首先被读取。
+				2.然后根据properties元素中的resource属性读取类路径下属性文件，或根据url属性指定的路径读取属性文件，并覆盖已读取的同名属性。
+				3.最后读取作为方法参数传递的属性，并覆盖已读取的同名属性。
+			因此，通过方法参数传递的属性具有最高的优先级，resource/url属性中指定的配置文件辞职，最低优先级是properties属性中指定的属性。
+				
+			

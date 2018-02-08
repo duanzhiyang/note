@@ -1,0 +1,17 @@
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence
+{
+    /** The value is used for character storage. */
+    private final char value[];
+
+    /** The offset is the first index of the storage that is used. */
+    private final int offset;
+
+    /** The count is the number of characters in the String. */
+    private final int count;
+
+    private int hash; // Default to 0
+}
+
+1 String类是final类，所以String类不能被继承，并且它的成员方法都默认为final方法。在Java中，被final修饰的类不允许被继承，并且该
+	类中的成员方法都默认为final方法。

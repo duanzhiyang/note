@@ -19,3 +19,15 @@
 /studyProject/target/m2e-wtp/web-resources/META-INF/maven/com.redis.test/RedisDemo/*.xml
 /studyProject/target/m2e-wtp/web-resources/META-INF/maven/com.redis.test/studyProject/*.properties
 /studyProject/target/m2e-wtp/web-resources/META-INF/maven/com.redis.test/studyProject/*.xml
+/study/*.classpath
+/study/.idea/*.xml
+/study/*.project
+/study/.settings/*.prefs
+/study/bin/com/ming/*.class
+/study/bin/com/ming/annotation/*.class
+/study/bin/com/ming/charset/*.class
+/study/bin/com/ming/javac/*.class
+/study/bin/com/ming/nio/*.class
+/study/bin/com/ming/serialize/*.class
+/study/bin/com/ming/suanfa/*.class
+/study/*.bin
